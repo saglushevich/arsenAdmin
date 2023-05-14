@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Layout from '@components/layout'
 import Orders from '@components/Orders';
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const response = await fetch("https://diplom-e-commerce-server.onrender.com/api/auth/orders");
 
     const data = await response.json();
@@ -11,8 +11,7 @@ export async function getStaticProps() {
     return {
         props: {
             orders: data
-        },
-        revalidate: 20,
+        }
     }
 }
 
