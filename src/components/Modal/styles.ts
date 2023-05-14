@@ -71,3 +71,13 @@ export const CloseBtn = styled.div`
     color: #FFF;
     cursor: pointer;
 `;
+
+export const Message = styled.div`
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Raleway';
+    font-weight: 700;
+    font-size: 18px;
+    color: #5ECE7B;
+    text-transform: uppercase;
+`;
