@@ -1,4 +1,4 @@
-import { Wrapper, Form, Button, Input, Inputs, Message, ImageWrapper } from "./styles";
+import { Wrapper, Form, Button, Input, Inputs, Message, ImageWrapper, Dropdawn, DropDawnHeader, Menu, MenuItem, MenuButton } from "./styles";
 import { addProduct } from "@actions";
 import { ChangeEvent, SyntheticEvent, useState } from "react";
 
@@ -11,6 +11,7 @@ function AddForm() {
     const [gallery, setGallery] = useState<string[]>([]);
     const [message, setMessage] = useState("");
     const [disabled, setDisabled] = useState(false);
+    const [dropdawn, setDropdawn] = useState(false);
 
     const onSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
@@ -27,7 +28,7 @@ function AddForm() {
 
         const response = await addProduct(title, brand, category, price.replace(/,/g, "."), description, gallery);
 
-        console.log(response);
+        // console.log(response);
         if (response) {
             setMessage("Добавлено! Проверьте отображение в каталоге!")
 
@@ -49,6 +50,15 @@ function AddForm() {
         setGallery(gallery => [...gallery, e.target.value]);
     }
 
+    const onToggleDropdawn = () => {
+        setDropdawn(prevDropdown => !prevDropdown)
+    }
+
+    const onSelectCategory = (type: string) => () => {
+        setCategory(type);
+        setDropdawn(false)
+    }
+
     return (
         <Wrapper>
             <Form encType="multipart/form-data">
@@ -56,14 +66,17 @@ function AddForm() {
                 <Inputs>
                     <Input required value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Название товара"/>
                     <Input required value={brand} onChange={(e) => setBrand(e.target.value)} placeholder="Производитель товара"/>
-                    <Input required value={category} list="category" onChange={(e) => setCategory(e.target.value)} placeholder="Категория товара"/>
-                    <datalist id="category">
-                        <option>phone</option>
-                        <option>laptop</option>
-                        <option>tv</option>
-                        <option>headphones</option>
-                        <option>other</option>
-                    </datalist> 
+                    <DropDawnHeader onClick={onToggleDropdawn}>{category ? category : 'Категория товара'}</DropDawnHeader>
+                    {/* <Input required defaultValue={category} list="category" onChange={(e) => setCategory(e.target.value)} placeholder="Категория товара"/> */}
+                    {dropdawn && <Dropdawn>
+                        <Menu>
+                            <MenuItem onClick={onSelectCategory('phone')}>phone</MenuItem>
+                            <MenuItem onClick={onSelectCategory('laptop')}>laptop</MenuItem>
+                            <MenuItem onClick={onSelectCategory('tv')}>tv</MenuItem>
+                            <MenuItem onClick={onSelectCategory('headphones')}>headphones</MenuItem>
+                            <MenuItem onClick={onSelectCategory('other')}>other</MenuItem>
+                        </Menu>
+                    </Dropdawn>}
                 </Inputs>
                 <Inputs>
                     <Input required value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Цена товара"/>

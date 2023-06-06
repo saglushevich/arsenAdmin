@@ -32,7 +32,7 @@ function Catalog({ products }: any) {
     return (
         <Wrapper>
             <Title>
-                Удаление товаров
+                Управление товарами
             </Title>
             <Products>
                 {goods}
