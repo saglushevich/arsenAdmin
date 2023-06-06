@@ -36,6 +36,13 @@ export const Title = styled.div`
     font-size: 28px;
 `;
 
+export const FieldTitle = styled.div`
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 18px;
+`
+
 export const Number = styled(Title)`
     color: #5ECE7B;
     margin-top: 10px;
@@ -95,6 +102,7 @@ export const Status = styled.div``;
 
 export const Inputs = styled.div`
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
     margin-top: 15px;
 `;

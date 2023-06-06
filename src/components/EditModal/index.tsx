@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Wrapper, Content, Title, Radio, Number, Text, Input, Form, Button, CloseBtn, Label, Status, Inputs, Block } from "./styles";
+import { Wrapper, Content, Title, Radio, Number, Text, Input, Form, FieldTitle, Button, CloseBtn, Label, Status, Inputs, Block } from "./styles";
 
 export function EditModal({ order, onEdit, onSubmit }: any) {
     const [newOrder, setNewOrder] = useState(order);
@@ -87,10 +87,22 @@ export function EditProduct({ product, onEdit, onSubmit }: any) {
                 <Number>№ {_id}</Number>
                 <Form onSubmit={onSendForm}>
                     <Inputs>
-                        <Input name="title" onChange={onInputChange} placeholder="Название" defaultValue={title} required/>
-                        <Input name="brand" onChange={onInputChange} placeholder="Производитель" defaultValue={brand} required/>
-                        <Input name="category" onChange={onInputChange} placeholder="Название" defaultValue={category} required/>
-                        <Input name="price" onChange={onInputChange} placeholder="Цена" defaultValue={price} required/>
+                        <div>
+                            <FieldTitle>Название</FieldTitle>
+                            <Input name="title" onChange={onInputChange} placeholder="Название" defaultValue={title} required/>
+                        </div>
+                        <div>
+                            <FieldTitle>Производитель</FieldTitle>
+                            <Input name="brand" onChange={onInputChange} placeholder="Производитель" defaultValue={brand} required/>
+                        </div>
+                        <div>
+                            <FieldTitle>Категория</FieldTitle>
+                            <Input name="category" onChange={onInputChange} placeholder="Название" defaultValue={category} required/>
+                        </div>
+                        <div>
+                            <FieldTitle>Цена</FieldTitle>
+                            <Input name="price" onChange={onInputChange} placeholder="Цена" defaultValue={price} required/>
+                        </div>
                     </Inputs>
                     <Button>Сохранить</Button>
                 </Form>
